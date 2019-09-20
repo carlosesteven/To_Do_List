@@ -1,0 +1,52 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "441208c08226f0aff136755f89d3b9d1",
+    "entities": [
+      {
+        "tableName": "Tarea",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idTarea` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombreTarea` TEXT, `descripcionTarea` TEXT, `colorTarea` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idTarea",
+            "columnName": "idTarea",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombreTarea",
+            "columnName": "nombreTarea",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "descripcionTarea",
+            "columnName": "descripcionTarea",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "colorTarea",
+            "columnName": "colorTarea",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idTarea"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '441208c08226f0aff136755f89d3b9d1')"
+    ]
+  }
+}

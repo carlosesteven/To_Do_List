@@ -18,10 +18,12 @@
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+
         />
 
 
     <TextView
+        android:id="@+id/itemTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
