@@ -18,8 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".interfaz.activity.AgregarTarea" />
-        <activity android:name=".interfaz.activity.EditarTarea" />
+        <activity
+            android:label="@string/agregar_tarea"
+            android:name=".interfaz.activity.AgregarTarea" />
+        <activity
+            android:label="@string/editar_tarea"
+            android:name=".interfaz.activity.EditarTarea" />
     </application>
 
 </manifest>

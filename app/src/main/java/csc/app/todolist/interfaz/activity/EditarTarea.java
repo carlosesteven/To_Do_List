@@ -1,11 +1,13 @@
 package csc.app.todolist.interfaz.activity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -40,9 +42,9 @@ public class EditarTarea extends AppCompatActivity {
         descripcion = findViewById( R.id.descripcion );
         FloatingActionButton btnAgregar = findViewById(R.id.btnAgregar);
 
-        colorA = findViewById( R.id.colorRojo );
-        colorB = findViewById( R.id.colorAmarillo );
-        colorC = findViewById( R.id.colorAzul );
+        colorA = findViewById( R.id.colorA );
+        colorB = findViewById( R.id.colorB );
+        colorC = findViewById( R.id.colorC );
 
         int idTarea = getIntent().getIntExtra("idTarea", 0);
 
@@ -119,12 +121,15 @@ public class EditarTarea extends AppCompatActivity {
         switch ( tarea.getColorTarea() )
         {
             case 1:
+                cambiarColorTitulo( R.color.colorA );
                 colorA.setChecked( true );
                 break;
             case 2:
+                cambiarColorTitulo( R.color.colorB );
                 colorB.setChecked( true );
                 break;
             case 3:
+                cambiarColorTitulo( R.color.colorC );
                 colorC.setChecked( true );
                 break;
         }
@@ -151,6 +156,16 @@ public class EditarTarea extends AppCompatActivity {
         ).show();
 
         finish();
+    }
+
+    private void cambiarColorTitulo(int color)
+    {
+        if ( getSupportActionBar() != null )
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
+
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, color));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, color));
+
     }
 
 }

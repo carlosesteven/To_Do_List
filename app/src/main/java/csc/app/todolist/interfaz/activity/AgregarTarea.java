@@ -26,9 +26,9 @@ public class AgregarTarea extends AppCompatActivity {
         TextInputEditText descripcion = findViewById( R.id.descripcion );
         FloatingActionButton btnAgregar = findViewById( R.id.btnAgregar);
 
-        RadioButton colorA = findViewById( R.id.colorRojo );
-        RadioButton colorB = findViewById( R.id.colorAmarillo );
-        RadioButton colorC = findViewById( R.id.colorAzul );
+        RadioButton colorA = findViewById( R.id.colorA );
+        RadioButton colorB = findViewById( R.id.colorB );
+        RadioButton colorC = findViewById( R.id.colorC );
 
         btnAgregar.setOnClickListener( view ->
         {

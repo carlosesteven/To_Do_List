@@ -7,4 +7,6 @@
     <color name="colorA">@android:color/holo_red_dark</color>
     <color name="colorB">@android:color/holo_orange_dark</color>
     <color name="colorC">@android:color/holo_blue_dark</color>
+
+    <color name="colorEditText">@android:color/black</color>
 </resources>
