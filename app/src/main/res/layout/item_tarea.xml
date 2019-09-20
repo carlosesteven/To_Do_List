@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    android:background="@drawable/style_item"
+    android:layout_margin="3dp"
     android:padding="10dp"
     >
 
@@ -29,6 +31,8 @@
         app:layout_constraintRight_toRightOf="parent"
 
         android:layout_marginStart="10dp"
+
+        android:maxLines="1"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
