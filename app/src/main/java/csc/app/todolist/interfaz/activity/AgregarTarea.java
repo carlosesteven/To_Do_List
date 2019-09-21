@@ -19,6 +19,8 @@ public class AgregarTarea extends AppCompatActivity {
 
     private int idColor = 0;
 
+    private FloatingActionButton btnAgregar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class AgregarTarea extends AppCompatActivity {
 
         TextInputEditText titulo = findViewById( R.id.titulo );
         TextInputEditText descripcion = findViewById( R.id.descripcion );
-        FloatingActionButton btnAgregar = findViewById( R.id.btnAgregar);
+        btnAgregar = findViewById( R.id.btnAgregar);
 
         RadioButton colorA = findViewById( R.id.colorA );
         colorA.setOnClickListener(view -> cambiarColorUI(R.color.colorA) );
@@ -101,6 +103,8 @@ public class AgregarTarea extends AppCompatActivity {
     {
         if ( getSupportActionBar() != null )
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
+
+        btnAgregar.setBackgroundTintList( getResources().getColorStateList(color) );
 
         getWindow().setNavigationBarColor(ContextCompat.getColor(this, color));
         getWindow().setStatusBarColor(ContextCompat.getColor(this, color));

@@ -34,6 +34,8 @@ public class MostrarTarea extends AppCompatActivity {
     private VM_tareas viewModel;
     private Tarea objeto;
 
+    private FloatingActionButton btnAgregar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,7 @@ public class MostrarTarea extends AppCompatActivity {
 
         titulo = findViewById( R.id.titulo_tarea );
         descripcion = findViewById( R.id.descripcion_tarea );
-        FloatingActionButton btnAgregar = findViewById(R.id.btnEditar);
+        btnAgregar = findViewById(R.id.btnEditar);
 
         btnAgregar.setOnClickListener(
                 view -> {
@@ -104,6 +106,8 @@ public class MostrarTarea extends AppCompatActivity {
     {
         if ( getSupportActionBar() != null )
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
+
+        btnAgregar.setBackgroundTintList( getResources().getColorStateList(color) );
 
         getWindow().setNavigationBarColor(ContextCompat.getColor(this, color));
         getWindow().setStatusBarColor(ContextCompat.getColor(this, color));

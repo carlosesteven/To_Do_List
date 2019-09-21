@@ -26,6 +26,7 @@ public class EditarTarea extends AppCompatActivity {
 
     private TextInputEditText titulo;
     private TextInputEditText descripcion;
+    private FloatingActionButton btnAgregar;
 
     private RadioButton colorA;
     private RadioButton colorB;
@@ -40,7 +41,7 @@ public class EditarTarea extends AppCompatActivity {
 
         titulo = findViewById( R.id.titulo );
         descripcion = findViewById( R.id.descripcion );
-        FloatingActionButton btnAgregar = findViewById(R.id.btnAgregar);
+        btnAgregar = findViewById(R.id.btnAgregar);
 
         colorA = findViewById( R.id.colorA );
         colorA.setOnClickListener(view -> cambiarColorUI(R.color.colorA) );
@@ -165,6 +166,8 @@ public class EditarTarea extends AppCompatActivity {
     {
         if ( getSupportActionBar() != null )
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
+
+        btnAgregar.setBackgroundTintList( getResources().getColorStateList(color) );
 
         getWindow().setNavigationBarColor(ContextCompat.getColor(this, color));
         getWindow().setStatusBarColor(ContextCompat.getColor(this, color));
