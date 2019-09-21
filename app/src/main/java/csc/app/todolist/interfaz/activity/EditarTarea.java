@@ -121,15 +121,15 @@ public class EditarTarea extends AppCompatActivity {
         switch ( tarea.getColorTarea() )
         {
             case 1:
-                cambiarColorTitulo( R.color.colorA );
+                cambiarColorUI( R.color.colorA );
                 colorA.setChecked( true );
                 break;
             case 2:
-                cambiarColorTitulo( R.color.colorB );
+                cambiarColorUI( R.color.colorB );
                 colorB.setChecked( true );
                 break;
             case 3:
-                cambiarColorTitulo( R.color.colorC );
+                cambiarColorUI( R.color.colorC );
                 colorC.setChecked( true );
                 break;
         }
@@ -158,7 +158,7 @@ public class EditarTarea extends AppCompatActivity {
         finish();
     }
 
-    private void cambiarColorTitulo(int color)
+    private void cambiarColorUI(int color)
     {
         if ( getSupportActionBar() != null )
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));

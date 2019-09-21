@@ -4,4 +4,7 @@
     <string name="descripcion_tarea">Descripcion Tarea</string>
     <string name="agregar_tarea">Agregar Tarea</string>
     <string name="editar_tarea">Editar Tarea</string>
+    <string name="mostrar_tarea">Mostrar Tarea</string>
+    <string name="menu_borrar">Borrar</string>
+    <string name="menu_editar">Editar</string>
 </resources>

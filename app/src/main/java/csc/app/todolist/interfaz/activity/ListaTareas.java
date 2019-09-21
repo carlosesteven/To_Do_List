@@ -21,7 +21,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class ListaTareas extends AppCompatActivity {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private RecyclerView RvTareas;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         RV_item adaptador = new RV_item(
                 lista,
                 (v, position) -> {
-                    Intent editar = new Intent( getBaseContext(), EditarTarea.class );
+                    Intent editar = new Intent( getBaseContext(), MostrarTarea.class );
                     editar.putExtra( "idTarea", lista.get( position ).getIdTarea() );
                     startActivity( editar );
                 }

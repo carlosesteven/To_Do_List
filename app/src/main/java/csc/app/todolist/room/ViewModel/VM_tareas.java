@@ -45,6 +45,13 @@ public class VM_tareas extends AndroidViewModel {
         ).execute();
     }
 
+    public void eliminarTarea(Tarea tarea) {
+        new taskEliminarTarea(
+                tarea,
+                baseDatos
+        ).execute();
+    }
+
     private static class taskAgregarTarea extends AsyncTask<Void, Void, Void>
     {
         private DB_tareas baseDatos;
@@ -79,6 +86,25 @@ public class VM_tareas extends AndroidViewModel {
         protected Void doInBackground(Void... voids)
         {
             baseDatos.tareasDao().actualizarTarea(tareaNueva);
+            return null;
+        }
+    }
+
+    private static class taskEliminarTarea extends AsyncTask<Void, Void, Void>
+    {
+        private DB_tareas baseDatos;
+        private Tarea tareaNueva;
+
+        taskEliminarTarea(Tarea tareaNueva, DB_tareas baseDatos)
+        {
+            this.baseDatos = baseDatos;
+            this.tareaNueva = tareaNueva;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids)
+        {
+            baseDatos.tareasDao().eliminarTarea(tareaNueva);
             return null;
         }
     }
