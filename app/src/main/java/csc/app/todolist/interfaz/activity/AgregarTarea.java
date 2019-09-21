@@ -1,10 +1,12 @@
 package csc.app.todolist.interfaz.activity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -27,8 +29,11 @@ public class AgregarTarea extends AppCompatActivity {
         FloatingActionButton btnAgregar = findViewById( R.id.btnAgregar);
 
         RadioButton colorA = findViewById( R.id.colorA );
+        colorA.setOnClickListener(view -> cambiarColorUI(R.color.colorA) );
         RadioButton colorB = findViewById( R.id.colorB );
+        colorB.setOnClickListener(view -> cambiarColorUI(R.color.colorB) );
         RadioButton colorC = findViewById( R.id.colorC );
+        colorC.setOnClickListener(view -> cambiarColorUI(R.color.colorC) );
 
         btnAgregar.setOnClickListener( view ->
         {
@@ -90,6 +95,16 @@ public class AgregarTarea extends AppCompatActivity {
         ).show();
 
         finish();
+    }
+
+    private void cambiarColorUI(int color)
+    {
+        if ( getSupportActionBar() != null )
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
+
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, color));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, color));
+
     }
 
 }

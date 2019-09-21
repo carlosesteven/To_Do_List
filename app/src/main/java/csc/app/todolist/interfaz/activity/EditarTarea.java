@@ -43,8 +43,11 @@ public class EditarTarea extends AppCompatActivity {
         FloatingActionButton btnAgregar = findViewById(R.id.btnAgregar);
 
         colorA = findViewById( R.id.colorA );
+        colorA.setOnClickListener(view -> cambiarColorUI(R.color.colorA) );
         colorB = findViewById( R.id.colorB );
+        colorB.setOnClickListener(view -> cambiarColorUI(R.color.colorB) );
         colorC = findViewById( R.id.colorC );
+        colorC.setOnClickListener(view -> cambiarColorUI(R.color.colorC) );
 
         int idTarea = getIntent().getIntExtra("idTarea", 0);
 
