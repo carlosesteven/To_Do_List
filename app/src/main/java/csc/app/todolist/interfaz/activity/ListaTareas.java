@@ -3,6 +3,7 @@ package csc.app.todolist.interfaz.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,8 +49,12 @@ public class ListaTareas extends AppCompatActivity {
                 .subscribe(lista ->
                         {
                             Log.d("csc_debug", "Cantidad Tareas -> " + lista.size());
-                            if ( lista.size() > 0 )
+                            if ( lista.size() > 0 ) {
+                                RvTareas.setVisibility(View.VISIBLE);
                                 RV_tareas(lista);
+                            }else {
+                                RvTareas.setVisibility(View.INVISIBLE);
+                            }
                         }, e -> {
                             if ( e != null && e.getMessage() != null )
                                 Log.d("csc_debug", e.getMessage());
