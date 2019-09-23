@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">To Do List</string>
     <string name="titulo_tarea">Titulo Tarea</string>
-    <string name="descripcion_tarea">Descripcion Tarea</string>
+    <string name="descripcion_tarea">Descripción Tarea</string>
     <string name="agregar_tarea">Agregar Tarea</string>
     <string name="editar_tarea">Editar Tarea</string>
     <string name="mostrar_tarea">Mostrar Tarea</string>
