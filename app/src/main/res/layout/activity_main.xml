@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".interfaz.activity.ListaTareas"
-    tools:ignore="ContentDescription"
+    tools:ignore="ContentDescription,SpUsage"
     >
 
     <LinearLayout
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
 
             android:layout_marginStart="10dp"
-            android:text="@string/txt_no_auth"
+            android:text="@string/alert_no_auth"
             />
 
         <View
@@ -46,13 +46,24 @@
             android:layout_weight="1" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/user_btn"
+            android:id="@+id/user_btn_inicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
 
-            android:textSize="12sp"
+            android:textSize="10dp"
             android:text="@string/btn_iniciar_sesion"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/user_btn_cerrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
+            android:textSize="10dp"
+            android:text="@string/btn_cerrar_sesion"
+            android:visibility="gone"
             />
     </LinearLayout>
 

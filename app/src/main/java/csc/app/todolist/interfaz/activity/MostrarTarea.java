@@ -31,6 +31,8 @@ public class MostrarTarea extends AppCompatActivity {
     private TextView titulo;
     private TextView descripcion;
 
+    private int idTarea = 0;
+
     private VM_tareas viewModel;
     private Tarea objeto;
 
@@ -52,13 +54,10 @@ public class MostrarTarea extends AppCompatActivity {
                     Intent editar = new Intent(getBaseContext(), EditarTarea.class);
                     editar.putExtra("idTarea", objeto.getIdTarea() );
                     startActivity( editar );
-                    finish();
                 }
         );
+        idTarea = getIntent().getIntExtra("idTarea", 0);
 
-        int idTarea = getIntent().getIntExtra("idTarea", 0);
-
-        informacionTarea( idTarea );
     }
 
     private void informacionTarea( int key )
@@ -132,4 +131,9 @@ public class MostrarTarea extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        informacionTarea( idTarea );
+    }
 }

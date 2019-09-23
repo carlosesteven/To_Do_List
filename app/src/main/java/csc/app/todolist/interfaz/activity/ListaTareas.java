@@ -36,6 +36,7 @@ public class ListaTareas extends AppCompatActivity {
     private ImageView user_foto;
     private TextView user_nombre;
     private MaterialButton user_btn;
+    private MaterialButton user_btn_cerrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,13 @@ public class ListaTareas extends AppCompatActivity {
         TextView no_tareas = findViewById( R.id.error_no_tareas );
         user_foto = findViewById( R.id.user_foto );
         user_nombre = findViewById( R.id.user_nombre );
-        user_btn = findViewById( R.id.user_btn );
+        user_btn = findViewById( R.id.user_btn_inicio);
         user_btn.setOnClickListener(
                 view -> startActivity( new Intent( getBaseContext(), Autenticacion.class ) )
+        );
+        user_btn_cerrar = findViewById(R.id.user_btn_cerrar);
+        user_btn_cerrar.setOnClickListener(
+                view -> cerrarSesion()
         );
 
         RvTareas = findViewById( R.id.listaTareas );
@@ -85,6 +90,15 @@ public class ListaTareas extends AppCompatActivity {
 
     }
 
+    private void cerrarSesion() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString("user_foto", null);
+        editor.putString("user_nombre", null);
+        editor.apply();
+        validarAutenticacion();
+    }
+
     private void validarAutenticacion()
     {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -96,11 +110,17 @@ public class ListaTareas extends AppCompatActivity {
         {
             userNombre = "Hola " + userNombre + "!";
             user_nombre.setText( userNombre );
-            Picasso.get().load(userFoto).into(user_foto);
+            Picasso.get()
+                    .load(userFoto)
+                    .error( R.drawable.ic_user )
+                    .into(user_foto);
             user_btn.setVisibility( View.GONE );
-            Log.d("csc-debug", userFoto);
+            user_btn_cerrar.setVisibility( View.VISIBLE );
         }else{
+            user_nombre.setText( getString(R.string.alert_no_auth) );
             user_btn.setVisibility( View.VISIBLE );
+            user_btn_cerrar.setVisibility( View.GONE );
+            user_foto.setImageResource( R.drawable.ic_user );
         }
     }
 

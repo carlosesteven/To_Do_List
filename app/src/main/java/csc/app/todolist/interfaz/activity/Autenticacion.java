@@ -58,6 +58,11 @@ public class Autenticacion extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        Toast.makeText(
+                getBaseContext(),
+                "Espera un momento",
+                Toast.LENGTH_SHORT
+        ).show();
         signIn();
     }
 
@@ -77,11 +82,6 @@ public class Autenticacion extends AppCompatActivity implements View.OnClickList
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null) {
-                    Toast.makeText(
-                            getBaseContext(),
-                            "Espera un momento",
-                            Toast.LENGTH_SHORT
-                    ).show();
                     firebaseAuthWithGoogle(account);
                 }
             } catch (ApiException e) {
@@ -132,6 +132,14 @@ public class Autenticacion extends AppCompatActivity implements View.OnClickList
         editor.apply();
 
         finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if ( mAuth.getCurrentUser() != null ) {
+            FirebaseAuth.getInstance().signOut();
+        }
     }
 
 }
