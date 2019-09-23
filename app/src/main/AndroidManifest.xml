@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
         <activity android:name=".interfaz.activity.ListaTareas">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +20,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/agregar_tarea"
-            android:name=".interfaz.activity.AgregarTarea" />
+            android:name=".interfaz.activity.AgregarTarea"
+            android:label="@string/agregar_tarea" />
         <activity
-            android:label="@string/editar_tarea"
-            android:name=".interfaz.activity.EditarTarea" />
+            android:name=".interfaz.activity.EditarTarea"
+            android:label="@string/editar_tarea" />
         <activity
-            android:label="@string/mostrar_tarea"
             android:name=".interfaz.activity.MostrarTarea"
+            android:label="@string/mostrar_tarea" />
+        <activity
+            android:theme="@style/AppTheme.Transparent"
+            android:name=".interfaz.activity.Autenticacion"
             />
     </application>
 
