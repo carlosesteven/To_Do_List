@@ -21,8 +21,8 @@ import java.util.List;
 
 import csc.app.todolist.R;
 import csc.app.todolist.interfaz.adaptador.RV_item;
+import csc.app.todolist.room.base_datos.DB_tareas;
 import csc.app.todolist.room.objetos.Tarea;
-import csc.app.todolist.room.view_model.VM_tareas;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -42,6 +42,8 @@ public class ListaTareas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DB_tareas baseDatos = DB_tareas.getDatabase(this);
 
         TextView no_tareas = findViewById( R.id.error_no_tareas );
         user_foto = findViewById( R.id.user_foto );
@@ -63,8 +65,8 @@ public class ListaTareas extends AppCompatActivity {
         FloatingActionButton btnAgregar = findViewById( R.id.btnAgregar);
         btnAgregar.setOnClickListener(view -> startActivity( new Intent(getBaseContext(), AgregarTarea.class) ));
 
-        VM_tareas viewModel = new VM_tareas( getApplication() );
-        Disposable disposable = viewModel
+        Disposable disposable = baseDatos
+                .tareasDao()
                 .getListaTareas()
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())

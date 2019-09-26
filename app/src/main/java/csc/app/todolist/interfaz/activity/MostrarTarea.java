@@ -3,11 +3,11 @@ package csc.app.todolist.interfaz.activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -17,23 +17,25 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import csc.app.todolist.R;
+import csc.app.todolist.room.base_datos.DB_tareas;
 import csc.app.todolist.room.objetos.Tarea;
-import csc.app.todolist.room.view_model.VM_tareas;
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MostrarTarea extends AppCompatActivity {
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     private TextView titulo;
     private TextView descripcion;
 
+    private DB_tareas baseDatos;
+
     private int idTarea = 0;
 
-    private VM_tareas viewModel;
     private Tarea objeto;
 
     private FloatingActionButton btnAgregar;
@@ -43,7 +45,7 @@ public class MostrarTarea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mostrar_tarea);
 
-        viewModel = new VM_tareas( getApplication() );
+        baseDatos = DB_tareas.getDatabase( this );
 
         titulo = findViewById( R.id.titulo_tarea );
         descripcion = findViewById( R.id.descripcion_tarea );
@@ -57,34 +59,38 @@ public class MostrarTarea extends AppCompatActivity {
                 }
         );
         idTarea = getIntent().getIntExtra("idTarea", 0);
-
     }
 
-    private void informacionTarea( int key )
+    private void informacionTarea( int idTarea )
     {
-        Disposable disposable = viewModel
-                .buscarTarea( key )
-                .subscribeOn(Schedulers.computation())
+        Single<Tarea> tareaSingle = baseDatos
+                .tareasDao()
+                .buscarTarea( idTarea );
+        tareaSingle
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(tareaBuscada ->
-                        {
-                            if ( tareaBuscada != null )
-                            {
-                                objeto = tareaBuscada;
-                                mostrarInformacion( tareaBuscada );
-                            }
-                        }, e -> {
-                            if ( e != null && e.getMessage() != null )
-                                Log.d("csc_debug", e.getMessage());
-                            else
-                                Log.d("csc_debug", "Se produjo un error al verificar la lista de tareas");
-                        }
+                .subscribe(new SingleObserver<Tarea>()
+                           {
+                               @Override
+                               public void onSubscribe(Disposable d)
+                               {
+                               }
+                               @Override
+                               public void onSuccess(Tarea actual)
+                               {
+                                   mostrarInformacion( actual );
+                               }
+                               @Override
+                               public void onError(Throwable e) {
+                                   Toast.makeText( getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                               }
+                           }
                 );
-        compositeDisposable.add(disposable);
     }
 
     private void mostrarInformacion( Tarea tarea )
     {
+        objeto = tarea;
         titulo.setText( tarea.getNombreTarea() );
         descripcion.setText( tarea.getDescripcionTarea() );
         switch ( tarea.getColorTarea() )
@@ -99,6 +105,40 @@ public class MostrarTarea extends AppCompatActivity {
                 cambiarColorUI( R.color.colorC );
                 break;
         }
+    }
+
+    private void eliminarTarea()
+    {
+        Completable.fromAction(
+                () -> baseDatos.tareasDao().eliminarTarea( objeto )
+        ).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CompletableObserver() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Toast.makeText(
+                                getBaseContext(),
+                                "Tarea Eliminada",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(
+                                getBaseContext(),
+                                e.getMessage(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                });
     }
 
     private void cambiarColorUI(int color)
@@ -125,8 +165,7 @@ public class MostrarTarea extends AppCompatActivity {
     {
         int id = item.getItemId();
         if (id == R.id.menu_borrar) {
-            viewModel.eliminarTarea( objeto );
-            finish();
+            eliminarTarea();
         }
         return super.onOptionsItemSelected(item);
     }

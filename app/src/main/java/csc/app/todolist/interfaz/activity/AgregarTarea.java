@@ -12,12 +12,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import csc.app.todolist.R;
+import csc.app.todolist.room.base_datos.DB_tareas;
 import csc.app.todolist.room.objetos.Tarea;
-import csc.app.todolist.room.view_model.VM_tareas;
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class AgregarTarea extends AppCompatActivity {
 
     private int idColor = 0;
+    private DB_tareas baseDatos;
 
     private FloatingActionButton btnAgregar;
 
@@ -25,6 +31,8 @@ public class AgregarTarea extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agregar_tarea);
+
+        baseDatos = DB_tareas.getDatabase( this );
 
         TextInputEditText titulo = findViewById( R.id.titulo );
         TextInputEditText descripcion = findViewById( R.id.descripcion );
@@ -79,24 +87,43 @@ public class AgregarTarea extends AppCompatActivity {
 
     private void agregarTarea(String titulo, String descripcion, int color)
     {
-        Tarea nuevaTarea = new Tarea();
+        Completable.fromAction(
+                () -> {
+                    Tarea nuevaTarea = new Tarea();
+                    nuevaTarea.setNombreTarea( titulo );
+                    nuevaTarea.setDescripcionTarea( descripcion );
+                    nuevaTarea.setColorTarea( color );
+                    baseDatos.tareasDao().crearTarea( nuevaTarea );
+                }
+        )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        nuevaTarea.setNombreTarea( titulo );
-        nuevaTarea.setDescripcionTarea( descripcion );
-        nuevaTarea.setColorTarea( color );
+                    }
 
-        VM_tareas viewModel = new VM_tareas( getApplication() );
-        viewModel.crearTarea(
-                nuevaTarea
-        );
+                    @Override
+                    public void onComplete() {
+                        Toast.makeText(
+                                getBaseContext(),
+                                "Tarea Creada",
+                                Toast.LENGTH_LONG
+                        ).show();
+                        finish();
+                    }
 
-        Toast.makeText(
-                getBaseContext(),
-                "Tarea Creada",
-                Toast.LENGTH_LONG
-        ).show();
-
-        finish();
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(
+                                getBaseContext(),
+                                e.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                        finish();
+                    }
+                });
     }
 
     private void cambiarColorUI(int color)
