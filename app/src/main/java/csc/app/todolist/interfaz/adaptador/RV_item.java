@@ -109,18 +109,20 @@ public class RV_item extends RecyclerView.Adapter<RV_item.ItemView>
         view.tituloTarea.setText( actual.getNombreTarea() );
     }
 
+    /*
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+     */
 
     @NonNull
     @Override
     public ItemView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_tarea, viewGroup, false);
-        final ItemView pvh = new ItemView(v);
-        v.setOnClickListener(v1 -> listener.onItemClick(v1, pvh.getLayoutPosition() ));
-        return pvh;
+        final ItemView itemActual = new ItemView(v);
+        v.setOnClickListener(v1 -> listener.onItemClick(v1, itemActual.getLayoutPosition() ));
+        return itemActual;
     }
 
     @Override
