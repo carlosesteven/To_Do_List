@@ -21,7 +21,7 @@ public abstract class BD_tareas extends RoomDatabase {
             synchronized (BD_tareas.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            BD_tareas.class, "anime_favoritos")
+                            BD_tareas.class, "lista_tareas")
                             .build();
                 }
             }
