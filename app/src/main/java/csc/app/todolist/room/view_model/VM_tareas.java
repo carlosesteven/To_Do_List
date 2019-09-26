@@ -1,4 +1,4 @@
-package csc.app.todolist.room.ViewModel;
+package csc.app.todolist.room.view_model;
 
 import android.app.Application;
 import android.os.AsyncTask;

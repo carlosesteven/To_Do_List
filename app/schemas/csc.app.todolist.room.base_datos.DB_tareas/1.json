@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "441208c08226f0aff136755f89d3b9d1",
+    "identityHash": "c18bfa696349146c0d5a08a1037af708",
     "entities": [
       {
         "tableName": "Tarea",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idTarea` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombreTarea` TEXT, `descripcionTarea` TEXT, `colorTarea` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idTarea` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombreTarea` TEXT, `descripcionTarea` TEXT, `colorTarea` INTEGER NOT NULL, `completaTarea` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "idTarea",
@@ -31,6 +31,12 @@
             "columnName": "colorTarea",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "completaTarea",
+            "columnName": "completaTarea",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -46,7 +52,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '441208c08226f0aff136755f89d3b9d1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c18bfa696349146c0d5a08a1037af708')"
     ]
   }
 }

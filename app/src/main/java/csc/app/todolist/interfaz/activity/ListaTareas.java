@@ -21,8 +21,8 @@ import java.util.List;
 
 import csc.app.todolist.R;
 import csc.app.todolist.interfaz.adaptador.RV_item;
-import csc.app.todolist.room.ViewModel.VM_tareas;
 import csc.app.todolist.room.objetos.Tarea;
+import csc.app.todolist.room.view_model.VM_tareas;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -128,6 +128,7 @@ public class ListaTareas extends AppCompatActivity {
     {
         RV_item adaptador = new RV_item(
                 lista,
+                getBaseContext(),
                 (v, position) -> {
                     Intent editar = new Intent( getBaseContext(), MostrarTarea.class );
                     editar.putExtra( "idTarea", lista.get( position ).getIdTarea() );

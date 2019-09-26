@@ -8,13 +8,8 @@
     <string name="menu_borrar">Borrar</string>
     <string name="menu_editar">Editar</string>
 
-
-    <!--
-    <string name="default_web_client_id">AIzaSyA8Z6pFA4GXfziJMTZH2reZ_1mSZ_Zv5Fo</string>
-    -->
     <string name="btn_iniciar_sesion">Iniciar Sesión</string>
     <string name="alert_no_auth">Hola! Bienvenido a To Do List</string>
     <string name="alert_no_tareas">Sin Tareas</string>
     <string name="btn_cerrar_sesion">Cerrar Sesión</string>
-
 </resources>

@@ -21,6 +21,9 @@ public class Tarea
     @ColumnInfo(name = "colorTarea")
     private int colorTarea;
 
+    @ColumnInfo(name = "completaTarea")
+    private boolean completaTarea = false;
+
     public Tarea()
     {
         this.idTarea = 0;
@@ -56,5 +59,13 @@ public class Tarea
 
     public void setColorTarea(int colorTarea) {
         this.colorTarea = colorTarea;
+    }
+
+    public boolean isCompletaTarea() {
+        return completaTarea;
+    }
+
+    public void setCompletaTarea(boolean completaTarea) {
+        this.completaTarea = completaTarea;
     }
 }

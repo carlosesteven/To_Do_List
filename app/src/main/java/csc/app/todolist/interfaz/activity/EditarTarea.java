@@ -13,8 +13,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import csc.app.todolist.R;
-import csc.app.todolist.room.ViewModel.VM_tareas;
 import csc.app.todolist.room.objetos.Tarea;
+import csc.app.todolist.room.view_model.VM_tareas;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
