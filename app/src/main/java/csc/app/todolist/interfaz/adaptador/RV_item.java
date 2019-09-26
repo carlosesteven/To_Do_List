@@ -19,7 +19,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.List;
 
 import csc.app.todolist.R;
-import csc.app.todolist.room.base_datos.DB_tareas;
+import csc.app.todolist.room.base_datos.BD_tareas;
 import csc.app.todolist.room.objetos.Tarea;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
@@ -34,13 +34,13 @@ public class RV_item extends RecyclerView.Adapter<RV_item.ItemView>
 
     private List<Tarea> listaTareas;
     private INTERFACE_click listener;
-    private DB_tareas baseDatos;
+    private BD_tareas baseDatos;
 
     public RV_item(List<Tarea> listaTareas, Context contex, INTERFACE_click listener )
     {
         this.listaTareas = listaTareas;
         this.listener = listener;
-        this.baseDatos = DB_tareas.getDatabase( contex );
+        this.baseDatos = BD_tareas.getDatabase( contex );
     }
 
     static class ItemView extends RecyclerView.ViewHolder

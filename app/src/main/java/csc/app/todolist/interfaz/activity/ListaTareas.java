@@ -21,7 +21,7 @@ import java.util.List;
 
 import csc.app.todolist.R;
 import csc.app.todolist.interfaz.adaptador.RV_item;
-import csc.app.todolist.room.base_datos.DB_tareas;
+import csc.app.todolist.room.base_datos.BD_tareas;
 import csc.app.todolist.room.objetos.Tarea;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -43,7 +43,7 @@ public class ListaTareas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DB_tareas baseDatos = DB_tareas.getDatabase(this);
+        BD_tareas baseDatos = BD_tareas.getDatabase(this);
 
         TextView no_tareas = findViewById( R.id.error_no_tareas );
         user_foto = findViewById( R.id.user_foto );

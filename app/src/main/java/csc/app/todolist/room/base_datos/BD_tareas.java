@@ -10,18 +10,18 @@ import csc.app.todolist.room.dao.DAO_tarea;
 import csc.app.todolist.room.objetos.Tarea;
 
 @Database(entities = {Tarea.class}, version = 1)
-public abstract class DB_tareas extends RoomDatabase {
+public abstract class BD_tareas extends RoomDatabase {
 
     public abstract DAO_tarea tareasDao();
 
-    private static volatile DB_tareas INSTANCE;
+    private static volatile BD_tareas INSTANCE;
 
-    public static DB_tareas getDatabase(final Context context) {
+    public static BD_tareas getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (DB_tareas.class) {
+            synchronized (BD_tareas.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            DB_tareas.class, "anime_favoritos")
+                            BD_tareas.class, "anime_favoritos")
                             .build();
                 }
             }

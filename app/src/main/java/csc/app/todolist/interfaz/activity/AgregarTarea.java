@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import csc.app.todolist.R;
-import csc.app.todolist.room.base_datos.DB_tareas;
+import csc.app.todolist.room.base_datos.BD_tareas;
 import csc.app.todolist.room.objetos.Tarea;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
@@ -23,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
 public class AgregarTarea extends AppCompatActivity {
 
     private int idColor = 0;
-    private DB_tareas baseDatos;
+    private BD_tareas baseDatos;
 
     private FloatingActionButton btnAgregar;
 
@@ -32,7 +32,7 @@ public class AgregarTarea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agregar_tarea);
 
-        baseDatos = DB_tareas.getDatabase( this );
+        baseDatos = BD_tareas.getDatabase( this );
 
         TextInputEditText titulo = findViewById( R.id.titulo );
         TextInputEditText descripcion = findViewById( R.id.descripcion );

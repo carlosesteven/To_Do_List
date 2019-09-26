@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import csc.app.todolist.R;
-import csc.app.todolist.room.base_datos.DB_tareas;
+import csc.app.todolist.room.base_datos.BD_tareas;
 import csc.app.todolist.room.objetos.Tarea;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
@@ -32,7 +32,7 @@ public class MostrarTarea extends AppCompatActivity {
     private TextView titulo;
     private TextView descripcion;
 
-    private DB_tareas baseDatos;
+    private BD_tareas baseDatos;
 
     private int idTarea = 0;
 
@@ -45,7 +45,7 @@ public class MostrarTarea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mostrar_tarea);
 
-        baseDatos = DB_tareas.getDatabase( this );
+        baseDatos = BD_tareas.getDatabase( this );
 
         titulo = findViewById( R.id.titulo_tarea );
         descripcion = findViewById( R.id.descripcion_tarea );

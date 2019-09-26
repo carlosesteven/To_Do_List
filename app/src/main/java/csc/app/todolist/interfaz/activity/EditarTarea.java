@@ -12,26 +12,23 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import csc.app.todolist.R;
-import csc.app.todolist.room.base_datos.DB_tareas;
+import csc.app.todolist.room.base_datos.BD_tareas;
 import csc.app.todolist.room.objetos.Tarea;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class EditarTarea extends AppCompatActivity {
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     private TextInputEditText titulo;
     private TextInputEditText descripcion;
     private FloatingActionButton btnAgregar;
 
-    private DB_tareas baseDatos;
+    private BD_tareas baseDatos;
 
     private RadioButton colorA;
     private RadioButton colorB;
@@ -44,7 +41,7 @@ public class EditarTarea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editar_tarea);
 
-        baseDatos = DB_tareas.getDatabase( this );
+        baseDatos = BD_tareas.getDatabase( this );
 
         titulo = findViewById( R.id.titulo );
         descripcion = findViewById( R.id.descripcion );
